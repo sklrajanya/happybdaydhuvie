@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Universal center */
+/* Common centered screen */
 .screen {
     height: 100vh;
     display: flex;
@@ -21,6 +21,10 @@ body {
     align-items: center;
     flex-direction: column;
     text-align: center;
+}
+
+.hidden {
+    display: none;
 }
 
 /* Buttons */
@@ -39,8 +43,6 @@ button:hover {
     background: #ff8fab;
 }
 
-.hidden { display: none; }
-
 /* Cake */
 .cake {
     font-size: 120px;
@@ -52,14 +54,14 @@ button:hover {
     50% { transform: translateY(-12px); }
 }
 
-/* Question text */
+/* Question */
 .question {
     font-size: 28px;
     color: #b5174d;
     margin-bottom: 20px;
 }
 
-/* Image box */
+/* Image */
 .image-box {
     width: 200px;
     height: 260px;
@@ -110,18 +112,14 @@ button:hover {
     transition: opacity 1s ease;
 }
 
-#forever-screen h1 {
-    font-size: 48px;
-    color: #b5174d;
-}
-
 #forever-screen h2 {
     color: #d6336c;
     font-size: 28px;
 }
 
-#forever-screen p {
-    font-size: 18px;
+#forever-screen h1 {
+    font-size: 48px;
+    color: #b5174d;
 }
 
 /* Floating items */
@@ -169,7 +167,7 @@ button:hover {
     </div>
 </div>
 
-<!-- Message Section -->
+<!-- Message -->
 <div id="message-section" class="hidden">
     <h1>Happy Birthday Dhuvie 🤍</h1>
 
@@ -194,7 +192,7 @@ I love you dhruv.
     </div>
 </div>
 
-<!-- Forever Screen -->
+<!-- Forever -->
 <div id="forever-screen" class="screen">
     <h2>Happy Birthday Love 🤍</h2>
     <p>Happy 24th Ayu</p>
@@ -202,52 +200,59 @@ I love you dhruv.
 </div>
 
 <script>
+const cakeScreen = document.getElementById("cake-screen");
+const questionScreen = document.getElementById("question-screen");
+const wrongScreen = document.getElementById("wrong-screen");
+const messageSection = document.getElementById("message-section");
+const foreverScreen = document.getElementById("forever-screen");
+
 function showQuestion() {
-    cake-screen.style.display = "none";
-    question-screen.style.display = "flex";
+    cakeScreen.style.display = "none";
+    questionScreen.style.display = "flex";
 }
 
 function yesAnswer() {
-    question-screen.style.display = "none";
-    wrong-screen.style.display = "none";
-    message-section.style.display = "block";
+    questionScreen.style.display = "none";
+    wrongScreen.style.display = "none";
+    messageSection.style.display = "block";
 }
 
 function noAnswer() {
-    question-screen.style.display = "none";
-    wrong-screen.style.display = "flex";
+    questionScreen.style.display = "none";
+    wrongScreen.style.display = "flex";
 }
 
-/* Scroll to Forever */
+/* Scroll-based Forever screen */
 let shown = false;
 window.addEventListener("scroll", () => {
     if (shown) return;
     if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 10) {
         shown = true;
-        message-section.style.opacity = "0";
+        messageSection.style.opacity = "0";
         setTimeout(() => {
-            message-section.style.display = "none";
-            forever-screen.style.display = "flex";
-            forever-screen.style.opacity = "1";
+            messageSection.style.display = "none";
+            foreverScreen.style.display = "flex";
+            foreverScreen.style.opacity = "1";
         }, 900);
     }
 });
 
-/* Floating hearts, cakes, balloons */
+/* Floating hearts, balloons, cakes */
 const items = ["❤","💗","🤍","💖","🎈","🎂"];
 const colors = ["#ff4d6d","#ffffff","#ffb3c6","#f3c4fb","#ffd6e0"];
 
 setInterval(() => {
     const el = document.createElement("div");
     el.className = "float";
-    el.innerHTML = items[Math.floor(Math.random()*items.length)];
-    el.style.left = Math.random()*100 + "vw";
-    el.style.fontSize = Math.random()*22 + 18 + "px";
-    el.style.color = colors[Math.floor(Math.random()*colors.length)];
+    el.innerHTML = items[Math.floor(Math.random() * items.length)];
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = Math.random() * 22 + 18 + "px";
+    el.style.color = colors[Math.floor(Math.random() * colors.length)];
     document.body.appendChild(el);
     setTimeout(() => el.remove(), 7000);
 }, 350);
 </script>
 
 </body>
-</html>
+ </html>
+            
